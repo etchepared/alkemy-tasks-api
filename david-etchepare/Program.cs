@@ -1,5 +1,6 @@
 using Microsoft.EntityFrameworkCore;
 using david_etchepare.DataAccess;
+using david_etchepare.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<ContextDB>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 }
 );
+builder.Services.AddScoped<IUnitOfWork, UnitOfWorkService>();
 
 var app = builder.Build();
 

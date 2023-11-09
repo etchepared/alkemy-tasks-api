@@ -13,7 +13,7 @@ namespace david_etchepare.Repository
             _contextDB = contextDB;
         }
 
-        public async Task<List<T>> GetAll()
+        public virtual async Task<List<T>> GetAll()
         {
             var entity = await _contextDB.Set<T>().ToListAsync();
             return entity;
