@@ -17,8 +17,8 @@ namespace david_etchepare.Controllers
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
-            var tareas = await _unitOfWork.TareaRepository.GetAllTareas();
-            return Ok(tareas);
+
+            return Ok(await _unitOfWork.TareaRepository.GetAllTareas());
         }
     }
 }
