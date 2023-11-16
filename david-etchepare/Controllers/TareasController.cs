@@ -19,7 +19,6 @@ namespace david_etchepare.Controllers
         [Route("GetAllTareas")]
         public async Task<IActionResult> GetAll()
         {
-
             return Ok(await _unitOfWork.TareaRepository.GetAllTareas());
         }
 
@@ -47,6 +46,19 @@ namespace david_etchepare.Controllers
                 return Ok("Se actualizó correctamente.");
             }
             return BadRequest("Error al actualizar.");
+        }
+
+        [HttpDelete]
+        [Route("DeleteTarea")]
+        public async Task<ActionResult> Delete(int id) 
+        {
+            var result = await _unitOfWork.TareaRepository.DeleteTarea(id);
+            if(result)
+            {
+                await _unitOfWork.Complete();
+                return Ok("Se eliminó correctamente.");
+            }
+            return BadRequest("Error al eliminar");
         }
     }
 }
