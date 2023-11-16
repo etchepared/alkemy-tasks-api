@@ -31,10 +31,22 @@ namespace david_etchepare.Controllers
             if (result)
             {
                 await _unitOfWork.Complete();
-                return Ok("Se guardó correctamente");
+                return Ok("Se guardó correctamente.");
             }
-            return BadRequest("Error");
-            
+            return BadRequest("Error al crear.");
+        }
+
+        [HttpPut]
+        [Route("UpdateTarea")]
+        public async Task<ActionResult> Update(int id, TareaRegisterDTO tareaRegisterDTO)
+        {
+            var result = await _unitOfWork.TareaRepository.UpdateTarea(tareaRegisterDTO, id);
+            if (result)
+            {
+                await _unitOfWork.Complete();
+                return Ok("Se actualizó correctamente.");
+            }
+            return BadRequest("Error al actualizar.");
         }
     }
 }
