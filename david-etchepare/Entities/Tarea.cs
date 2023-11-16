@@ -1,5 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using david_etchepare.DTOs;
 
 namespace david_etchepare.Entities
 {
@@ -19,5 +20,12 @@ namespace david_etchepare.Entities
         [Column("tarea_isCompleted")]
         public bool IsCompleted { get; set; }
 
+        public static implicit operator Tarea(TareaRegisterDTO v)
+        {
+            var tarea = new Tarea();
+            tarea.TareaTitle = v.TareaTitle;
+            tarea.TareaDescription = v.TareaDescription;
+            return tarea;
+        }
     }
 }

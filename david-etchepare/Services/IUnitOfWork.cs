@@ -5,5 +5,7 @@ namespace david_etchepare.Services
     public interface IUnitOfWork
     {
         public TareaRepository TareaRepository { get; set; }
+
+        public Task<int> Complete();
     }
 }
