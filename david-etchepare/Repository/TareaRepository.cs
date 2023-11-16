@@ -32,6 +32,23 @@ namespace david_etchepare.Repository
                 return false;
             }
         }
+
+        public async Task<bool> UpdateTarea(TareaRegisterDTO tareaRegisterDTO, int id)
+        {
+            try
+            {
+                var tareas = new Tarea();
+                tareas = tareaRegisterDTO;
+                tareas.Id = id;
+                tareas.IsCompleted = tareaRegisterDTO.IsCompleted;
+
+                return await base.Update(tareas);
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+        }
     }
 }
 //Lo vamos a utilizar para los filtros
