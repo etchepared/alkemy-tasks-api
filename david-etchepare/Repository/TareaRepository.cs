@@ -14,8 +14,21 @@ namespace david_etchepare.Repository
 
         public virtual async Task<List<Tarea>> GetAllTareas()
         {
-            var tareas = await _contextDB.Tareas.ToListAsync();
+            var tareas = await _contextDB.Tareas.Where(t => t.IsCompleted == false).ToListAsync();
             return tareas;
+        }
+
+        public async Task<Tarea?> GetTareasById(int id)
+        {
+            try 
+            { 
+                var tareas = await _contextDB.Tareas.Where(t => t.Id == id).FirstOrDefaultAsync();
+                return tareas;
+            }
+            catch (Exception ex) 
+            {
+                return null;
+            }
         }
 
         public async Task<bool> InsertTarea(TareaRegisterDTO tareaRegisterDTO)
@@ -45,6 +58,21 @@ namespace david_etchepare.Repository
                 return await base.Update(tareas);
             }
             catch (Exception ex)
+            {
+                return false;
+            }
+        }
+
+        public async Task<bool> DeleteTarea(int id)
+        {
+            try 
+            {
+                var tareas = await GetTareasById(id);
+                tareas.IsCompleted = true;
+                
+                return await base.Update(tareas);
+            }
+            catch (Exception ex) 
             {
                 return false;
             }
